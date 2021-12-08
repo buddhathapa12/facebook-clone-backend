@@ -2,6 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import connectDataBase from "./db.js";
 import userRoutes from "./routes/users.route.js";
+import authRoutes from "./routes/auth.route.js";
 import helmet from "helmet";
 import morgan from "morgan";
 
@@ -18,6 +19,7 @@ app.use(morgan("common"));
 
 //route
 app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
