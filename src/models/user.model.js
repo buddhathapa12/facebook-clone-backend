@@ -28,7 +28,7 @@ const UserSchema = new Schema(
       default: "",
     },
     coverPicture: {
-      tyoe: String,
+      type: String,
       default: "",
     },
     followers: {

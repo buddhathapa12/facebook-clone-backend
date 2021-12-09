@@ -5,6 +5,7 @@ import userRoutes from "./routes/users.route.js";
 import authRoutes from "./routes/auth.route.js";
 import helmet from "helmet";
 import morgan from "morgan";
+import bodyParser from "body-parser";
 
 const app = express();
 config();
@@ -16,6 +17,9 @@ connectDataBase();
 app.use(express("json"));
 app.use(helmet());
 app.use(morgan("common"));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //route
 app.use("/api/users", userRoutes);
