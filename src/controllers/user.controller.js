@@ -1,4 +1,5 @@
 import User from "../models/user.model.js";
+import bcrypt from "bcrypt";
 
 export async function getInform(req, res, next) {
   console.log("Mero tauko dukhi sakyo yr");
@@ -7,10 +8,13 @@ export async function getInform(req, res, next) {
 
 export async function createUser(req, res, next) {
   try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
     const newUser = await new User({
       username: req.body.username,
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
     });
     await newUser.save();
 
@@ -20,6 +24,6 @@ export async function createUser(req, res, next) {
       newUser,
     });
   } catch (err) {
-    console.log(err);
+    console.log("Hello", err);
   }
 }
