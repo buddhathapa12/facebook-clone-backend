@@ -44,3 +44,15 @@ export async function login(req, res, next) {
     res.status(500).json(err);
   }
 }
+
+export async function updateUser(req, res, next) {
+  try {
+    if (req.body.userId == req.params.id || req.user.isAdmin) {
+      console.log("Hello from put request.");
+    } else {
+      return res.status(403).json("You can update omly your accout.");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
